@@ -6,6 +6,7 @@ import (
 
 	service "meetcode-backend/service"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
@@ -21,6 +22,8 @@ func main() {
 	router := gin.Default()
 
 	userService := service.NewUserService(db)
+
+	router.Use(cors.Default())
 
 	// Route to handle user sign-up
 	router.POST("/signup", userService.SignUp)
